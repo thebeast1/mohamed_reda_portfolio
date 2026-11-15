@@ -1,0 +1,14 @@
+{
+  "name": "Mohamed Reda — Portfolio",
+  "short_name": "Mohamed Reda",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0A0E16",
+  "theme_color": "#0A0E16",
+  "description": "Portfolio of Mohamed Reda, Senior Flutter Developer.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

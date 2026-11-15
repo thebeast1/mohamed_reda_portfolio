@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    $FLUTTER_BASE_HREF is replaced by `flutter build web --base-href`.
+    The GitHub Actions workflow sets it to /<repo-name>/ for GitHub Pages.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mohamed Reda — Senior Flutter Developer with 6 years shipping Android, iOS and web apps in automotive, healthcare, edtech, transport and safety.">
+  <meta name="theme-color" content="#0A0E16">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mohamed Reda — Senior Flutter Developer">
+  <meta property="og:description" content="6 years shipping Flutter apps for Android, iOS and web. Payments, native SDKs, release engineering.">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <title>Mohamed Reda — Senior Flutter Developer</title>
+
+  <style>
+    html, body { margin: 0; height: 100%; background: #0A0E16; }
+    #loader {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #94A3B8; transition: opacity .4s ease;
+    }
+    #loader .badge {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: linear-gradient(135deg, #54C5F8, #0175C2);
+      display: flex; align-items: center; justify-content: center;
+      color: #0A0E16; font-weight: 800; font-size: 21px; letter-spacing: .5px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1 } 50% { transform: scale(.92); opacity: .7 } }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div class="badge">MR</div>
+    <div>Loading portfolio…</div>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var el = document.getElementById('loader');
+      if (!el) return;
+      el.style.opacity = '0';
+      setTimeout(function () { el.remove(); }, 450);
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
