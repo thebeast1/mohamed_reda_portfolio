@@ -30,11 +30,13 @@ The site is then live at `https://<your-username>.github.io/mohamed_reda_portfol
 
 ```
 lib/
-  main.dart              App entry + theme
-  theme.dart             Colors, text styles, button themes
-  home_page.dart         Nav bar, drawer, scroll-to-section
+  main.dart              App entry, go_router routes, shared shell (nav + footer)
+  theme.dart             Design tokens from the Figma template (colours, type, spacing)
   data/cv_data.dart      All portfolio content
-  sections/              Hero, About, Experience, Projects, Skills, Education, Contact
-  widgets/               Shared UI (cards, chips, responsive grid, nav)
+  pages/                 Home, About, Projects, Contact
+  widgets/               Design-system widgets (ds.dart), nav bar, footer, cards, screenshot strip
 web/                     index.html (loader, SEO tags), favicon, manifest
+
+Design: Figma community template "Full Stack Developer Portfolio – Modern Tech Showcase",
+rebuilt in Flutter with Poppins headings and Inter body text (loaded via google_fonts).
 ```

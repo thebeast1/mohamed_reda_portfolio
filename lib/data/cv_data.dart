@@ -148,6 +148,7 @@ class CvData {
           'Car-services marketplace for maintenance, repair, towing and rental, plus an internal operations app.',
       metric: '100K+ downloads · 45 feature modules',
       tags: ['Payments', 'Loyalty', 'Shorebird', 'Telematics SDK'],
+      liveApp: 0,
     ),
     Project(
       icon: Icons.school_outlined,
@@ -157,6 +158,7 @@ class CvData {
           "Student and teacher apps released under each teacher's own brand, with live video, exams and protected content.",
       metric: '160+ apps · ~300K downloads',
       tags: ['White-label', 'IAP', 'Fastlane'],
+      liveApp: 2,
     ),
     Project(
       icon: Icons.local_hospital_outlined,
@@ -173,6 +175,7 @@ class CvData {
       description:
           'Community and workplace incident reporting with live location sharing and "report and join" voice coordination.',
       tags: ['Firebase', 'Cloud Functions', 'Voice'],
+      liveApp: 3,
     ),
     Project(
       icon: Icons.engineering_outlined,
@@ -242,6 +245,48 @@ class CvData {
   ];
 
   static const languages = <String>['Arabic — native', 'English — professional working proficiency'];
+
+  /// Kinds of work shown on the Projects page.
+  static const domains = <FocusArea>[
+    FocusArea(
+      Icons.phone_android_outlined,
+      'Consumer apps',
+      'Car services, telehealth, online learning and safety apps on Google Play and the App Store.',
+    ),
+    FocusArea(
+      Icons.admin_panel_settings_outlined,
+      'Operations and admin tools',
+      'Internal apps for workshops and suppliers, permit-to-work workflows and web admin dashboards.',
+    ),
+    FocusArea(
+      Icons.sports_esports_outlined,
+      'Flutter Web and games',
+      'Web builds of production apps, white-label partner sites and seasonal Flame mini-games.',
+    ),
+  ];
+
+  static const faqs = <Faq>[
+    Faq(
+      'Are you open to new opportunities?',
+      'Yes. I am open to full-time remote Flutter roles and to selected freelance projects.',
+    ),
+    Faq(
+      'Do you work remotely?',
+      'I have worked remotely since 2020 from Cairo, Egypt (UTC+2), which overlaps well with Gulf and European working hours.',
+    ),
+    Faq(
+      'Which platforms do you build for?',
+      'Android, iOS and Flutter Web, with native Swift and Kotlin work where an SDK or extension needs it.',
+    ),
+    Faq(
+      'What does your usual stack look like?',
+      'Flutter with BLoC or Riverpod and Clean Architecture, Firebase and REST backends, payment SDKs, and Shorebird, Fastlane and Codemagic for releases.',
+    ),
+    Faq(
+      'What languages do you speak?',
+      'Arabic is my native language and I work professionally in English.',
+    ),
+  ];
 }
 
 class Stat {
@@ -287,6 +332,7 @@ class Project {
     required this.description,
     this.metric,
     this.tags = const [],
+    this.liveApp,
   });
 
   final IconData icon;
@@ -295,6 +341,23 @@ class Project {
   final String description;
   final String? metric;
   final List<String> tags;
+
+  /// Index into [LiveApps.all] when the project has a published listing.
+  final int? liveApp;
+
+  LiveApp? get app => liveApp == null ? null : LiveApps.all[liveApp!];
+
+  /// Store screenshot used as the card cover, if the app is published.
+  String? get coverUrl => app?.shots.firstOrNull?.thumb;
+
+  /// First store link, if the app is published.
+  String? get liveUrl => app?.links.firstOrNull?.url;
+}
+
+class Faq {
+  const Faq(this.question, this.answer);
+  final String question;
+  final String answer;
 }
 
 class SkillGroup {
