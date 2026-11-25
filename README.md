@@ -36,5 +36,6 @@ lib/
   data/cv_data.dart      All portfolio content
   sections/              Hero, About, Experience, Projects, Skills, Education, Contact
   widgets/               Shared UI (cards, chips, responsive grid, nav)
+assets/projects/         Screenshots bundled with the site (open-source projects)
 web/                     index.html (loader, SEO tags), favicon, manifest
 ```

@@ -10,6 +10,27 @@ const double kMobileBreakpoint = 760;
 bool isMobileWidth(BuildContext context) =>
     MediaQuery.sizeOf(context).width < kMobileBreakpoint;
 
+/// Shows a bundled image (path starting with `assets/`) or a network image.
+Widget appImage(
+  String src, {
+  BoxFit fit = BoxFit.cover,
+  double? width,
+  double? height,
+  ImageErrorWidgetBuilder? errorBuilder,
+}) {
+  if (src.startsWith('assets/')) {
+    return Image.asset(src, fit: fit, width: width, height: height, errorBuilder: errorBuilder);
+  }
+  return Image.network(
+    src,
+    fit: fit,
+    width: width,
+    height: height,
+    webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+    errorBuilder: errorBuilder,
+  );
+}
+
 Future<void> openLink(String url) async {
   final uri = Uri.parse(url);
   await launchUrl(

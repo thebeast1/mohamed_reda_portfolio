@@ -11,7 +11,7 @@ class LiveAppsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionShell(
       eyebrow: 'Live apps',
-      title: 'Apps you can download today',
+      title: 'Apps you can download and try',
       child: Column(
         children: [
           for (final app in LiveApps.all)
@@ -112,10 +112,8 @@ class _AppIcon extends StatelessWidget {
         height: 60,
         child: app.iconUrl == null
             ? fallback
-            : Image.network(
+            : appImage(
                 app.iconUrl!,
-                fit: BoxFit.cover,
-                webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
                 errorBuilder: (_, __, ___) => fallback,
               ),
       ),
@@ -133,6 +131,7 @@ class _StoreButton extends StatelessWidget {
     final icon = switch (link.kind) {
       StoreKind.googlePlay => Icons.shop,
       StoreKind.appStore => Icons.apple,
+      StoreKind.github => Icons.code_rounded,
       StoreKind.more => Icons.apps_rounded,
     };
     final primary = link.kind != StoreKind.more;
@@ -189,11 +188,7 @@ class _ScreenshotStripState extends State<_ScreenshotStrip> {
             padding: const EdgeInsets.all(24),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                shot.full,
-                fit: BoxFit.contain,
-                webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
-              ),
+              child: appImage(shot.full, fit: BoxFit.contain),
             ),
           ),
         ),
@@ -233,12 +228,11 @@ class _ScreenshotStripState extends State<_ScreenshotStrip> {
                       border: Border.all(color: AppColors.border),
                     ),
                     clipBehavior: Clip.antiAlias,
-                    child: Image.network(
+                    child: appImage(
                       shot.thumb,
                       width: _widthOf(shot),
                       height: widget.height,
                       fit: BoxFit.contain,
-                      webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
                       errorBuilder: (_, __, ___) => const Center(
                         child: Icon(
                           Icons.image_not_supported_outlined,

@@ -20,7 +20,8 @@ class CvData {
       'healthcare, edtech, transport and safety. For the past three years I have '
       'worked on Mismar, a Saudi car-services app with 100K+ Google Play '
       'downloads and 15K App Store ratings, covering payments, loyalty, native '
-      'SDK integration, analytics and over-the-air releases. Working remotely '
+      'SDK integration, analytics and over-the-air releases. Recently I built Khadeja, '
+      'an open-source AI assistant that runs Gemma 4 entirely on the phone. Working remotely '
       'since 2020. Native Arabic, professional English.';
 
   static const stats = <Stat>[
@@ -141,6 +142,15 @@ class CvData {
 
   static const projects = <Project>[
     Project(
+      icon: Icons.auto_awesome_outlined,
+      category: 'On-device AI · Open source',
+      name: 'Khadeja · خديچة',
+      description:
+          'Private AI chat assistant running Gemma 4 E2B entirely on the phone with LiteRT-LM: text, photo and voice input, streamed replies, English and Arabic.',
+      metric: 'Android & iOS · personal project, Nov 2026',
+      tags: ['Gemma 4', 'LiteRT-LM', 'Multimodal', 'Provider'],
+    ),
+    Project(
       icon: Icons.directions_car_outlined,
       category: 'Automotive · Saudi Arabia',
       name: 'Mismar',
@@ -227,6 +237,12 @@ class CvData {
       'Shorebird', 'Fastlane', 'Codemagic', 'Git', 'Sentry', 'Crashlytics',
     ]),
     SkillGroup('Analytics', ['Firebase Analytics', 'PostHog', 'Adjust', 'CleverTap']),
+    SkillGroup('On-device AI', [
+      'Gemma 4 E2B', 'LiteRT-LM', 'flutter_edge_ai', 'Multimodal (image & audio)', 'Token streaming', 'System prompts', 'Offline-first',
+    ]),
+    SkillGroup('Media & Device', [
+      'Audio recording (WAV)', 'Waveforms', 'Camera & gallery', 'Runtime permissions', 'Native splash & adaptive icons',
+    ]),
   ];
 
   static const education = Education(
@@ -322,7 +338,7 @@ class EarlyRole {
 // screenshots hot-linked from the stores.
 // ---------------------------------------------------------------------------
 
-enum StoreKind { googlePlay, appStore, more }
+enum StoreKind { googlePlay, appStore, github, more }
 
 class StoreLink {
   const StoreLink(this.kind, this.url, [this.label]);
@@ -335,11 +351,12 @@ class StoreLink {
       switch (kind) {
         StoreKind.googlePlay => 'Google Play',
         StoreKind.appStore => 'App Store',
+        StoreKind.github => 'GitHub',
         StoreKind.more => 'More',
       };
 }
 
-enum ShotSource { play, appStore }
+enum ShotSource { play, appStore, asset }
 
 /// A store screenshot. [base] is the image URL without its size suffix.
 class Shot {
@@ -348,14 +365,23 @@ class Shot {
   const Shot.play(this.base, {this.aspect = 9 / 19.5}) : source = ShotSource.play;
   const Shot.appStore(this.base, {this.aspect = 9 / 19.5}) : source = ShotSource.appStore;
 
+  /// A screenshot bundled with the site under `assets/`.
+  const Shot.asset(this.base, {this.aspect = 9 / 19.5}) : source = ShotSource.asset;
+
   final String base;
   final ShotSource source;
   final double aspect;
 
-  String get thumb =>
-      source == ShotSource.play ? '$base=h840' : '${base}420x912bb.jpg';
-  String get full =>
-      source == ShotSource.play ? '$base=h1600' : '${base}736x1600bb.jpg';
+  String get thumb => switch (source) {
+        ShotSource.play => '$base=h840',
+        ShotSource.appStore => '${base}420x912bb.jpg',
+        ShotSource.asset => base,
+      };
+  String get full => switch (source) {
+        ShotSource.play => '$base=h1600',
+        ShotSource.appStore => '${base}736x1600bb.jpg',
+        ShotSource.asset => base,
+      };
 }
 
 class LiveApp {
@@ -385,8 +411,35 @@ class LiveApp {
 class LiveApps {
   static const _play = 'https://play-lh.googleusercontent.com/';
   static const _mz = 'https://is1-ssl.mzstatic.com/image/thumb/';
+  static const _khadeja = 'assets/projects/khadeja';
 
   static const all = <LiveApp>[
+    LiveApp(
+      name: 'Khadeja · خديچة',
+      company: 'Personal project · On-device AI',
+      description:
+          'A private AI chat assistant that runs Gemma 4 E2B on the phone through LiteRT-LM, with no server '
+          'and no account. Ask by text, photo or voice message and get streamed, markdown-formatted replies '
+          'in English or Arabic, fully offline after a one-time model download.',
+      metric: 'Flutter · Android & iOS · open source on GitHub',
+      iconUrl: '$_khadeja/icon.png',
+      fallbackIcon: Icons.auto_awesome_outlined,
+      links: [
+        StoreLink(StoreKind.github, 'https://github.com/thebeast1/personal_ai_assistant'),
+      ],
+      shots: [
+        Shot.asset('$_khadeja/02_empty_chat.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/03_text_reply.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/06_voice_reply.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/10_photo_reply.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/08_photo_attached.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/09_thinking.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/04_recording.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/05_voice_attached.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/07_clear_dialog.jpg', aspect: 600 / 1304),
+        Shot.asset('$_khadeja/01_download.jpg', aspect: 600 / 1333),
+      ],
+    ),
     LiveApp(
       name: 'MisMar مسمار',
       company: 'Mismar · Customer app',
